@@ -32,7 +32,7 @@ export const Navigation = () => {
                   <NavLink
                     to={path}
                     activeClassName="nav-active"
-                    exact>
+                    exact={false}>
                     {name}
                   </NavLink>
                 </li>
