@@ -1,28 +1,21 @@
-export interface IProductCardProps {
-    product: IProduct,
-    children?: React.ReactElement | React.ReactElement[]
-}
+import { IProductButtonsProps } from "../components/ProductButtons";
+import { IProductImageProps } from "../components/ProductImage";
+import { IProductTitleProps } from "../components/ProductTitle";
+import { IProps as ProductCardProps } from "../components/ProductCard";
 
 export interface IProduct {
     id: string;
-    title: string;
     img?: string;
+    title: string;
 }
-
-export interface IProductButtonProps {
-    increaseBy: (value: number) => void,
-    counter: number
-}
-
 export interface IProductContextProps {
     counter: number;
     increaseBy: (value: number) => void;
     product: IProduct;
 }
-
 export interface IProductCardHOCProps {
-    ({ product, children }: IProductCardProps): JSX.Element;
-    Title: ({ title }: { title?: string }) => JSX.Element;
-    Image: ({ img }: { img?: string }) => JSX.Element;
-    Buttons: () => JSX.Element
+    ({ product, children }: ProductCardProps): JSX.Element; // creo el objeto
+    Buttons: (Props: IProductButtonsProps) => JSX.Element // al objeto creado le creo la propiedad Buttons
+    Image: (Props : IProductImageProps) => JSX.Element;     // al objeto creado le creo la propiedad Image
+    Title: (Props : IProductTitleProps) => JSX.Element;     // al objeto creado le creo la propiedad Title
 }

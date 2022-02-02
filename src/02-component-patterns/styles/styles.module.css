@@ -1,5 +1,13 @@
-/* Ojo que este archivo tiene es sufijo .module.  porque asi es que se necesita, que sea un module */
+/* Ojo que este archivo tiene es sufijo .module.  porque asi es que se necesita, que sea un module,
 
+    el comentario  @type  es obligatorio para poder trabajar con la extension npm install -g typed-css-modules que se
+    usa para tener un tipado con css modules para poder ver las clasess que necesitemos usar
+
+
+*/
+
+
+/* @type */
 .productCard {
     background-color: white;
     border-radius: 15px;
