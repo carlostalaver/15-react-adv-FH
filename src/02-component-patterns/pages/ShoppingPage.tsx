@@ -4,68 +4,41 @@ import { useShoppingCart } from "../hooks/useShoppingCart";
 import { products } from "../data/products";
 
 
+const product = products[0];
 
 export const ShoppingPage = () => {
 
-    const { onProductCounterChange, shoppingCart} = useShoppingCart();
+    const { onProductCounterChange, shoppingCart } = useShoppingCart();
 
     return (
         <div>
             <h1>Shopping Store</h1>
             <hr />
 
-            <div style={{
-                display: "flex",
-                flexDirection: "row",
-                flexWrap: "wrap"
-            }}>
+            <ProductCard key={product.id}
+                product={product}
+                onChangeCustom={(e) => onProductCounterChange(e)}
+                value={ shoppingCart[product.id]?.count || 0 }
+                initialValues= {{
+                    count: 4,
+                    maxCount: 10
+                }}
+            >
 
                 {
-                    products.map(product => (
-                        <ProductCard key={product.id}
-                            product={product}
-                            onChangeCustom={(e) => onProductCounterChange(e)}
-                            value={ shoppingCart[product.id]?.count || 0 }
-                            >
 
+                    () => (
+                        <>
                             <ProductCard.Image activeImgClass="active" />
                             <ProductCard.Title className="text-bold" activeTitleClass="active" />
                             <ProductCard.Buttons />
-
-                        </ProductCard>
-
-                    ))
-                }
-
-            </div>
-
-            <div className="shopping-cart">
-                {
-                    Object.values(shoppingCart).map(prod =>
-                        prod.count > 0 &&
-                        (<ProductCard
-                            key={prod.id}
-                            product={prod}
-                            className="bg-dark text-white"
-                            style={{
-                                width: '100px'
-                            }}
-                            onChangeCustom = { onProductCounterChange }
-                            value={ prod.count  }
-                        >
-                            <ProductImage className="custom-image" />
-                            <ProductButtons
-                                className="custom-buttons"
-                                style={{
-                                    display: 'flex',
-                                    justifyContent: 'center'
-                                }}
-                            />
-                        </ProductCard>)
+                        
+                        </>
                     )
                 }
 
-            </div>
+
+            </ProductCard>
 
             <div>
                 <code>
