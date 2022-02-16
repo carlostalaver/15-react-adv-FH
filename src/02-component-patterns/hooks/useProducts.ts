@@ -29,12 +29,16 @@ export const useProduct = ( {onChangeCustom, product, value = 0, initialValues}:
         onChangeCustom && onChangeCustom({ product: product, count: newValue} );
     };
 
+    const reset = () => {
+        setCounter( initialValues?.count || value );
+    }
+
     useEffect(() => {
         if( !isMounted.current ) return;
         setCounter(value);
     }, [value])
 
-    // cuando se monte el componente isMounted.current sera true
+    // cuando se monte el componente isMounted.current sera true, [] está vacio porq necesito que dispare una unica vez cuando el componente se monte
     useEffect(() => {
         isMounted.current = true;
     }, [])
@@ -42,7 +46,11 @@ export const useProduct = ( {onChangeCustom, product, value = 0, initialValues}:
 
     return {
         counter,
-        increaseBy
+        isMaxCountReached: !!initialValues?.count && initialValues?.maxCount === counter,
+        maxCount: initialValues?.maxCount,
+        
+        increaseBy,
+        reset
     }
 
 };

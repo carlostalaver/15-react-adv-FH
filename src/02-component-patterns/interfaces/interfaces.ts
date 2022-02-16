@@ -10,8 +10,9 @@ export interface IProduct {
 }
 export interface IProductContextProps {
     counter: number;
-    increaseBy: (value: number) => void;
+    maxCount?: number;
     product: IProduct;
+    increaseBy: (value: number) => void;
 }
 export interface IProductCardHOCProps {
     ({ product, children }: XYZProductCardProps): JSX.Element; // creo el objeto
@@ -24,16 +25,23 @@ export interface IOnChangeArgs {
     product: IProduct;
     count: number
 }
-
-
 export interface IShoppingCart {
     [key: string]: IProductInCart; // [key:string] para idicarle que tendrán POR LO MENOS una propiedad cuyo nombre será de tipo string
 }
 export interface IProductInCart extends IProduct {
     count: number
 }
-
 export interface IInitialValues {
     count?: number;
     maxCount?: number
+}
+
+export interface IProductCardHandlers {
+    count: number;
+    isMaxCountReached: boolean;
+    maxCount?: number;
+    product: IProduct;
+
+    increaseBy: (value: number) => void;
+    reset: () => void;
 }

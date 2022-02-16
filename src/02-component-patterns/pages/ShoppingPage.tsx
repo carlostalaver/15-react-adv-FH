@@ -18,8 +18,8 @@ export const ShoppingPage = () => {
             <ProductCard key={product.id}
                 product={product}
                 onChangeCustom={(e) => onProductCounterChange(e)}
-                value={ shoppingCart[product.id]?.count || 0 }
-                initialValues= {{
+                value={shoppingCart[product.id]?.count || 0}
+                initialValues={{
                     count: 4,
                     maxCount: 10
                 }}
@@ -27,12 +27,19 @@ export const ShoppingPage = () => {
 
                 {
 
-                    () => (
+                    ({ reset, increaseBy, isMaxCountReached, maxCount, count}) => (
                         <>
                             <ProductCard.Image activeImgClass="active" />
                             <ProductCard.Title className="text-bold" activeTitleClass="active" />
                             <ProductCard.Buttons />
-                        
+
+                            <button onClick={ reset }>Reset</button>
+                            <button onClick={ () => increaseBy(-2) }>-2</button>
+                            {
+                                (!isMaxCountReached && <button onClick={ () => increaseBy(2) }> 2 </button>)
+                            }
+
+                            <span>{ count } - { maxCount }</span>
                         </>
                     )
                 }
